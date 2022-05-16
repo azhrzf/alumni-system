@@ -1,6 +1,7 @@
 <?php
+    // menghubungkan ke function
     require "functions.php";
-    $koneksi = query("SELECT * FROM alumni");
+    $alumni = query("SELECT * FROM alumni");
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
         </tr>
 
         <?php $no = 1; ?>
-            <?php foreach($koneksi as $tabel) : ?>
+            <?php foreach($alumni as $tabel) : ?>
                 <tr>
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $tabel["nim"]; ?></td>
