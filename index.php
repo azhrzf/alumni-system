@@ -1,7 +1,7 @@
 <?php
     // menghubungkan ke function
     require "functions.php";
-    $alumni = query("SELECT * FROM alumni");
+    $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +13,13 @@
     <title>Document</title>
 </head>
 <body>
+    <h3><a href=tambah.php style="text-decoration: none">Tambah Data</a></h3>
+    
+    <form action="" method="post">
+        <input type="text" name="keyword" placeholder="masukkan keyword" autofocus autocomplete="off">
+        <button type="submit" name="cari">Cari</button>
+    </form>
+    
     <table border= "2px solid black" cellpadding="10">
         <tr>
            <th>NO</th>
@@ -31,7 +38,7 @@
                     <td><?php echo $tabel["nama"]; ?></td>
                     <td><?php echo $tabel["prodi"]; ?></td>
                     <td><?php echo $tabel["thlulus"]; ?></td>
-                    <td><a href="#">Ubah</a> | <a href="#">Hapus</a></td>
+                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a> | <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a></td>
                 </tr>
             <?php endforeach; ?>
     </table>
