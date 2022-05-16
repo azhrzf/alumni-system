@@ -73,3 +73,37 @@
                 
         return query($search);
     }
+
+    function regristasi($data) {
+        // menerima data dari post
+
+        global $conn;
+
+        $username = test_input(strtolower($data["username"]));
+        // memungkinkan tanda "" dalam database
+        $password = mysqli_real_escape_string($conn, $data["password"]);
+        $konpassword = mysqli_real_escape_string($conn, $data["konpassword"]);
+
+        // cek username
+        $res = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+
+        if (mysqli_fetch_assoc($res)) {
+            echo "<script>alert('sudah ada')</script>";
+            return false;
+        }
+        
+        // cek konfirmasi password
+        if ($password !== $konpassword) {
+            echo "<script>alert('konfirmasi salah')</script>";
+            return false;
+        }
+
+        // enkripsi password
+        // password_hash, mengacak menggunakan algoritma default
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        // tambah user baru
+        mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password')");
+
+        return mysqli_affected_rows($conn);
+    }
