@@ -2,6 +2,10 @@
     // menghubungkan ke function
     require "functions.php";
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
+
+    if(isset($_POST["cari"])) {
+        $alumni = cari($_POST["keyword"]);
+    }
 ?>
 
 <!DOCTYPE html>

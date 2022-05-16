@@ -62,3 +62,14 @@
         
         return mysqli_affected_rows($conn);
     }
+
+    function cari($data) {
+
+        $search = "SELECT * FROM alumni WHERE
+                nim LIKE '%$data%' OR
+                nama LIKE '%$data%' OR
+                prodi LIKE '%$data%' OR
+                thlulus LIKE '%$data%' ORDER BY nim ASC";
+                
+        return query($search);
+    }
