@@ -31,7 +31,7 @@
                     <td><?php echo $tabel["nama"]; ?></td>
                     <td><?php echo $tabel["prodi"]; ?></td>
                     <td><?php echo $tabel["thlulus"]; ?></td>
-                    <td><a href="#">Ubah</a> | <a href="#">Hapus</a></td>
+                    <td><a href="#">Tracer</a></td>
                 </tr>
             <?php endforeach; ?>
     </table>
