@@ -1,4 +1,11 @@
 <?php
+    session_start();
+
+    if(!isset($_SESSION["login"])) {
+        header("Location: login.php");
+        exit;
+    }
+
     // menghubungkan ke function
     require "functions.php";
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
@@ -44,7 +51,7 @@
                     <td><?php echo $tabel["nama"]; ?></td>
                     <td><?php echo $tabel["prodi"]; ?></td>
                     <td><?php echo $tabel["thlulus"]; ?></td>
-                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a> | <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a></td>
+                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a></td>
                 </tr>
             <?php endforeach; ?>
     </table>

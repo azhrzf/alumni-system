@@ -76,6 +76,9 @@ if(isset($_POST["ubah"])) {
                 <td><label for="thlulus">thlulus:</label></td>
                 <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" required></td>
             </tr>
+            <tr>
+                <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a>
+            </tr>
         </table>        
         <button type="submit" name="ubah">submit</button>
     </form>
