@@ -1,7 +1,18 @@
 <?php
+    session_start();
+
+    if(!isset($_SESSION["login"])) {
+        header("Location: login.php");
+        exit;
+    }
+
     // menghubungkan ke function
     require "functions.php";
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
+
+    if(isset($_POST["cari"])) {
+        $alumni = cari($_POST["keyword"]);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +24,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="local.php">Logout</a>
     <h3><a href=tambah.php style="text-decoration: none">Tambah Data</a></h3>
-    
+    <h3><a href=regristasi.php style="text-decoration: none">Daftar</a></h3>
     <form action="" method="post">
         <input type="text" name="keyword" placeholder="masukkan keyword" autofocus autocomplete="off">
         <button type="submit" name="cari">Cari</button>
@@ -38,7 +50,7 @@
                     <td><?php echo $tabel["nama"]; ?></td>
                     <td><?php echo $tabel["prodi"]; ?></td>
                     <td><?php echo $tabel["thlulus"]; ?></td>
-                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a> | <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a></td>
+                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a></td>
                 </tr>
             <?php endforeach; ?>
     </table>

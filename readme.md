@@ -7,3 +7,9 @@ CREATE TABLE alumni (
         );
 
 INSERT INTO alumni VALUES("", "20106050022", "Azhar Zaidan Fauzi", "Teknik Informatika", "2024");
+
+CREATE TABLE user(
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(50),
+        password VARCHAR(255));
+    )
