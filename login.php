@@ -64,6 +64,7 @@ if(isset($_POST["login"])) {
     <title>Login</title>
 </head>
 <body>
+    <h1><a href=index.php style="text-decoration: none">Regristasi</a></h1>
     <h1>Login</h1>
     <?php if(isset($error)) : ?>
         <p>Username or Paswot salah</p>

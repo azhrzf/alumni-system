@@ -24,10 +24,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="local.php">Logout</a>
     <h3><a href=tambah.php style="text-decoration: none">Tambah Data</a></h3>
-    
     <h3><a href=regristasi.php style="text-decoration: none">Daftar</a></h3>
-
     <form action="" method="post">
         <input type="text" name="keyword" placeholder="masukkan keyword" autofocus autocomplete="off">
         <button type="submit" name="cari">Cari</button>
