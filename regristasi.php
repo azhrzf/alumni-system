@@ -9,6 +9,7 @@ if (isset($_POST["register"])) {
     
     if (regristasi($_POST) > 0) {
         echo "<script>alert('berhasil blog')</script>";
+        header("Location: login.php");
     }
 
     else {

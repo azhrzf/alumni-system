@@ -3,7 +3,8 @@
 session_start();
 
 if(!isset($_SESSION["login"])) {
-    header("Location: login.php");
+    echo "<script>alert('ask admin or login admin')</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
 
@@ -22,7 +23,7 @@ if(isset($_POST["submit"])) {
 
     else {
         echo "<script>
-        alert('data gagal ditambahkan');
+        alert('data gagal ditambahkan, cek apa nim benar apa belum');
         document.location.href = 'index.php';
     </script>";
     }
