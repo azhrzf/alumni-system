@@ -2,12 +2,6 @@
 
 session_start();
 
-if(!isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
-
-
 require 'functions.php';
 
 // jika ditekan jalankan regristasi
@@ -34,6 +28,7 @@ if (isset($_POST["register"])) {
     <title>Regristasi</title>
 </head>
 <body>
+    <h1><a href=login.php style="text-decoration: none">Login</a></h1>
     <form action="" method="post" autocomplete="off">
     <table>
         <tr>

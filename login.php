@@ -43,6 +43,8 @@ if(isset($_POST["login"])) {
                 // buat cookie
                 
                 setcookie("id", $row['id'], time() + 60);
+                // mengacak username menggunakan hash
+                // algoritma + string
                 setcookie("key", hash('sha256', $row['username']), time() + 60);
             }
             header("Location: index.php");
@@ -64,7 +66,7 @@ if(isset($_POST["login"])) {
     <title>Login</title>
 </head>
 <body>
-    <h1><a href=index.php style="text-decoration: none">Regristasi</a></h1>
+    <h1><a href=regristasi.php style="text-decoration: none">Regristasi</a></h1>
     <h1>Login</h1>
     <?php if(isset($error)) : ?>
         <p>Username or Paswot salah</p>
