@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require "functions.php";
+    $conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 
     if(isset($_SESSION["login"])) {
         echo "<h3>Selamat kamu adalah admin</h3>";
@@ -10,7 +10,11 @@
 
 <?php
     $alunim = $_SESSION["alunim"];  
-    $alumni = query("SELECT * FROM alumni WHERE id = $alunim");
+    $alumni = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = $alunim");
+    if($alumni == false) {
+        echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
+        echo "<script>window.location.href = 'alutambah.php'</script>";
+    }
     foreach($alumni as $tabel) {
         $nim = $tabel['nim'];
         $nama = $tabel['nama'];

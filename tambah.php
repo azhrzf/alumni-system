@@ -3,7 +3,11 @@
 
     require "functions.php";
     
-    if(!isset($_SESSION["login"]) || !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
+    if(isset($_SESSION["alulogin"])) {
+        header("Location: alutambah.php");
+    }
+    
+    if(!isset($_SESSION["login"]) || !isset($_SESSION["alulogin"])) {
         header("Location: index.php");
         exit;
     }
@@ -11,16 +15,11 @@
     if(isset($_POST["submit"])) {
         // check apakah data berhasil ditambahkan atau tidak
         if(tambah($_POST) > 0 ) {
-            echo "<script>
-                alert('data berhasil ditambahkan');
-                document.location.href = 'index.php';
-                </script>";
+            echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
+            echo "<script>window.location.href = 'index.php'</script>";
         }
         else {
-            echo "<script>
-                alert('data gagal ditambahkan, cek apa nim benar apa belum');
-                document.location.href = 'index.php';
-                </script>";
+            echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
         }
     }
 ?>
@@ -39,7 +38,7 @@
         <table>
             <tr>
                 <td><label for="nim">NIM</label></td>
-                <td><input type="text" name="nim" id="nim" required></td>
+                <td><input type="text" name="nim" id="nim" min="11" max="11" required></td>
             </tr>
             <tr>
                 <td><label for="nama">Nama</label></td>

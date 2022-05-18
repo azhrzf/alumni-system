@@ -2,14 +2,20 @@
 
 session_start();
 
+require "functions.php";
+
 if(isset($_SESSION["login"]) || !isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
     echo "<script>alert('Bukan hakmu')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
 
-
-require "functions.php";
+$alunim = $_SESSION["alunim"];  
+$alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
+if($alumni == false) {
+    echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
+    echo "<script>window.location.href = 'alutambah.php'</script>";
+}
 
 $alunim = $_SESSION["alunim"];
 $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
@@ -64,7 +70,7 @@ if(isset($_POST["ubah"])) {
         <table>
             <tr>
                 <td><label for="nim">nim:</label></td>
-                <td><input type="text" name="acakadut" id="nim" value="<?= $nim; ?>" disabled required></td>
+                <td><input type="text" name="acakadut" id="nim" value="<?= $nim; ?>" min="11" max="11" disabled required></td>
             </tr>
             <tr>
                 <td><label for="nama">nama:</label></td>
@@ -79,7 +85,7 @@ if(isset($_POST["ubah"])) {
                 <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" required></td>
             </tr>
             <tr>
-                <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a>
+                <a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Yakin')">Hapus</a>
             </tr>
         </table>        
         <button type="submit" name="ubah">submit</button>

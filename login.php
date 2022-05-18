@@ -3,8 +3,7 @@
 
     require "functions.php";
 
-    if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
-        echo "<script>alert('Silakan logout terlebih dahulu')</script>";
+    if(isset($_SESSION["login"]) && !isset($_SESSION["alulogin"]) || !isset($_SESSION["login"]) && isset($_SESSION["alulogin"])) {
         echo "<script>window.location.href = 'index.php'</script>";
         exit;
     }

@@ -9,6 +9,12 @@
         exit;
     }
 
+    $alunim = $_SESSION["alunim"];  
+    $alul = query("SELECT * FROM alumni WHERE nim = $alunim");
+    if($alul == false) {
+        header("Location: allregristasi.php");
+    }
+
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
 
     if(isset($_POST["cari"])) {

@@ -4,7 +4,6 @@ session_start();
 require "functions.php";
 
 if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
-    echo "<script>alert('Logout dulu')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
@@ -57,7 +56,7 @@ if(isset($_POST["alulogin"])) {
                 // algoritma + string
                 setcookie("key", hash('sha256', $row['alunim']), time() + 60);
             }
-            header("Location: index.php");
+            header("Location: aluganti.php");
             exit;
         }
     }

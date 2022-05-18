@@ -3,7 +3,7 @@
 
     require "functions.php";
 
-    if(!isset($_SESSION["login"]) || !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
+    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
         header("Location: index.php");
         exit;
     }
@@ -20,26 +20,16 @@
     if(isset($_POST["ubah"])) {
 
         // check apakah data berhasil ditambahkan atau tidak
-
         if(ubah($_POST) > 0 ) {
-            echo "<script>
-                alert('data berhasil ditambahkan');
-                document.location.href = 'index.php';
-            </script>";
+            echo "<script>alert('Selamat data berhasil diperbarui')</script>";
+            echo "<script>window.location.href = 'index.php'</script>";
         }
-
         else if ($tabel) {
-            echo "<script>
-                alert('data berhasil ditambahkan');
-                document.location.href = 'index.php';
-            </script>";
+            echo "<script>alert('Selamat data berhasil diperbarui')</script>";
+            echo "<script>window.location.href = 'index.php'</script>";
         }
-
         else {
-            echo "<script>
-            alert('data gagal ditambahkan');
-            document.location.href = 'index.php';
-        </script>";
+            echo "<script>alert('Data gagal diperbarui, cek inputan kembali')</script>";
         }
     }
 ?>
@@ -50,35 +40,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubah Data</title>
+    <title>Tracer</title>
 </head>
 <body>
-    <h1>Ubah Data</h1>
+    <h1>Perbarui Data</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $id ?>">
         <table>
             <tr>
-                <td><label for="nim">nim:</label></td>
-                <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>"required></td>
+                <td><label for="nim">NIM</label></td>
+                <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>" min="11" max="11" required></td>
             </tr>
             <tr>
-                <td><label for="nama">nama:</label></td>
+                <td><label for="nama">Nama</label></td>
                 <td><input type="text" name="nama" id="nama" value="<?= $nama; ?>" required></td>
             </tr>
             <tr>
-                <td><label for="prodi">prodi:</label></td>
+                <td><label for="prodi">Program Studi</label></td>
                 <td><input type="text" name="prodi" id="prodi" value="<?= $prodi; ?>" required></td>
             </tr>
             <tr>
-                <td><label for="thlulus">thlulus:</label></td>
+                <td><label for="thlulus">Tahun Lulus</label></td>
                 <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" required></td>
             </tr>
-            <tr>
-                <a href="hapus.php?id=<?= $tabel['id']; ?>" onclick="return confirm('yakien?')">Hapus</a>
-            </tr>
         </table>        
-        <button type="submit" name="ubah">submit</button>
+        <button type="submit" name="ubah">Submit</button>
     </form>
+    <h3><a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Konfirmasi hapu')">Hapus</a></h3>
     <h3><a href=index.php style="text-decoration: none">Halaman utama</a></h3>
 </body>
 </html>

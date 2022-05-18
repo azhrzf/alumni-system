@@ -9,9 +9,8 @@ if(isset($_SESSION["login"]) || !isset($_SESSION["login"]) && !isset($_SESSION["
     exit;
 }
 
-echo $alunim = $_SESSION["alunim"];
-
-$result = mysqli_query($conn, "SELECT nim FROM alumni WHERE nim = '$alunim'");
+$alunim = $_SESSION["alunim"];
+$result = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = '$alunim'");
 
 foreach($result as $tabel) {
     if ($alunim == $tabel['nim']) {
@@ -54,7 +53,7 @@ if(isset($_POST["submit"])) {
         <table>
             <tr>
                 <td><label for="nim">nim:</label></td>
-                <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled required></td>
+                <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled min="11" max="11" required></td>
             </tr>
             <tr>
                 <td><label for="nama">nama:</label></td>
@@ -71,6 +70,5 @@ if(isset($_POST["submit"])) {
         </table>        
         <button type="submit" name="submit">submit</button>
     </form>
-    <h3><a href=index.php style="text-decoration: none">Halaman utama</a></h3>
 </body>
 </html>

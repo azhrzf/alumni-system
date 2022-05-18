@@ -39,7 +39,7 @@ if (isset($_POST["register"])) {
     <table>
         <tr>
             <td><label for="alunim">alunim</label></td>
-            <td>: <input type="text" name="alunim" id="alunim" maxlength="11" required></td>
+            <td>: <input type="text" name="alunim" id="alunim" minlength="11" maxlength="11" required></td>
         </tr>
         <tr>
             <td><label for="password">password</label></td>
