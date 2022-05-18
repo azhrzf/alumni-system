@@ -29,7 +29,7 @@ if (isset($_POST["register"])) {
     <title>Regristasi</title>
 </head>
 <body>
-    <h1><a href=login.php style="text-decoration: none">Login</a></h1>
+    <h1><a href=allogin.php style="text-decoration: none">All Login</a></h1>
     <form action="" method="post" autocomplete="off">
     <table>
         <tr>

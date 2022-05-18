@@ -4,12 +4,17 @@ session_start();
 
 require 'functions.php';
 
+if(isset($_SESSION["alulogin"])) {
+    echo "<script>alert('logout kembali untuk melakukan regristasi')</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
+}
+
 // jika ditekan jalankan regristasi
 if (isset($_POST["register"])) {
     
     if (aluregristasi($_POST) > 0) {
         echo "<script>alert('berhasil blog')</script>";
-        header("Location: login.php");
+        header("Location: alulogin.php");
     }
 
     else {

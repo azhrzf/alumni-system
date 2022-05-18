@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+    echo "<script>alert('Bukan hakmu')</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
+    exit;
+}
     // koneksi ke database
     $conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 

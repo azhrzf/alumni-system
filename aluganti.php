@@ -2,8 +2,8 @@
 
 session_start();
 
-if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-    echo "<script>alert('ask admin or login admin')</script>";
+if(isset($_SESSION["login"]) || !isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+    echo "<script>alert('Bukan hakmu')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }

@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "functions.php";
+
+$conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 
 // cek cookie
 if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {

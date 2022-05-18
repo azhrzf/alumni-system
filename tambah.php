@@ -4,7 +4,7 @@ session_start();
 
 if(!isset($_SESSION["login"])) {
     echo "<script>alert('ask admin or login admin')</script>";
-    echo "<script>window.location.href = 'index.php'</script>";
+    echo "<script>window.location.href = 'alllogin.php'</script>";
     exit;
 }
 

@@ -2,7 +2,7 @@
     session_start();
 
     if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-        header("Location: login.php");
+        header("Location: allogin.php");
         exit;
     }
 

@@ -1,6 +1,8 @@
 <?php
 session_start();
-require "functions.php";
+
+$conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
+
 
 // cek cookie
 if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {
@@ -66,7 +68,7 @@ if(isset($_POST["login"])) {
     <title>Login</title>
 </head>
 <body>
-    <h1><a href=regristasi.php style="text-decoration: none">Regristasi</a></h1>
+    <h1><a href=allregristasi.php style="text-decoration: none">All Regristasi</a></h1>
     <h1>Login</h1>
     <?php if(isset($error)) : ?>
         <p>Username or Paswot salah</p>
