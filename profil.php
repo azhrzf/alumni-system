@@ -4,6 +4,17 @@ session_start();
 
 require "functions.php";
 
+if(isset($_SESSION["login"])) {
+    echo "<h3>Selamat Kamu adalah admin</h3>";
+}
+
+?>  
+
+
+<?php if(isset($_SESSION["alulogin"])) : ?>
+
+<?php
+
 $alunim = $_SESSION["alunim"];
 $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
 foreach($alumni as $tabel) {
@@ -13,14 +24,7 @@ foreach($alumni as $tabel) {
     $thlulus = $tabel['thlulus'];
 }
 
-if(isset($_SESSION["login"])) {
-    echo "<h3>Selamat Kamu adalah admin</h3>";
-}
-
-?>  
-
-
-<?php if(isset($_SESSION["alulogin"])) : ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">

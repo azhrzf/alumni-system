@@ -2,10 +2,12 @@
 
 session_start();
 
-if(isset($_SESSION["alulogin"])) {
-    echo "<script>alert('logout kembali untuk melakukan regristasi')</script>";
+if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
+    echo "<script>alert('Logout dulu')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
+    exit;
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -1,8 +1,7 @@
 <?php
 
 if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-    echo "<script>alert('Bukan hakmu')</script>";
-    echo "<script>window.location.href = 'index.php'</script>";
+    header("Location: index.php");
     exit;
 }
     // koneksi ke database
