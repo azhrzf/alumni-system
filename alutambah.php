@@ -3,17 +3,21 @@ session_start();
 
 require "functions.php";
 
-$result = mysqli_query($conn, "SELECT alunim FROM alu");
-foreach($result as $assa) {
-    echo $assa['alunim'] . "<br>";
-}
-
-
 if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
     echo "<script>alert('ask admin or login admin')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
+
+echo $alunim = $_SESSION["alunim"];
+
+$result = mysqli_query($conn, "SELECT nim FROM alumni WHERE nim = '$alunim'");
+
+foreach($result as $tabel) {
+    if ($alunim == $tabel['nim']) {
+        header("Location: aluganti.php");
+    }
+}       
 
 if(isset($_POST["submit"])) {
 
@@ -46,10 +50,11 @@ if(isset($_POST["submit"])) {
 <body>
     <h1>Tambah Data</h1>
     <form action="" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="nim" value="<?= $_SESSION["alunim"] ?>">
         <table>
             <tr>
                 <td><label for="nim">nim:</label></td>
-                <td><input type="text" name="nim" id="nim" value=<?php echo $_SESSION["rese"]; ?> required></td>
+                <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled required></td>
             </tr>
             <tr>
                 <td><label for="nama">nama:</label></td>

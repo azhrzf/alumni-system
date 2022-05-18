@@ -2,16 +2,17 @@
 
 session_start();
 
-if(!isset($_SESSION["login"])) {
-    header("Location: login.php");
+if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+    echo "<script>alert('ask admin or login admin')</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
 
 
 require "functions.php";
 
-$id = $_GET['id'];
-$alumni = query("SELECT * FROM alumni WHERE id = $id");
+$alunim = $_SESSION["alunim"];
+$alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
 foreach($alumni as $tabel) {
     $nim = $tabel['nim'];
     $nama = $tabel['nama'];
@@ -59,10 +60,11 @@ if(isset($_POST["ubah"])) {
     <h1>Ubah Data</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="nim" value="<?= $nim ?>">
         <table>
             <tr>
                 <td><label for="nim">nim:</label></td>
-                <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>"required></td>
+                <td><input type="text" name="acakadut" id="nim" value="<?= $nim; ?>" disabled required></td>
             </tr>
             <tr>
                 <td><label for="nama">nama:</label></td>

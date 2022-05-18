@@ -27,7 +27,7 @@ if(isset($_POST["alulogin"])) {
     $alupassword = $_POST["alupassword"];
 
     // cek alunim apa ada di databse
-    $result = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$alunim'");
+    $result = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$alunim'");    
 
     // cek apa alunim ada
     if(mysqli_num_rows($result) === 1) {
@@ -37,7 +37,10 @@ if(isset($_POST["alulogin"])) {
         if (password_verify($alupassword, $row["alupassword"])) {
             // set session
             $_SESSION["alulogin"] = true;
-            
+            foreach($result as $assa) {
+                $_SESSION["alunim"] = $assa['alunim'];
+            }
+
             // remember me
             if (isset($_POST["remember"])) {
                 // buat cookie
