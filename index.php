@@ -5,14 +5,16 @@
     require "functions.php";
 
     if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-        header("Location: allogin.php");
+        header("Location: alllogin.php");
         exit;
     }
 
-    $alunim = $_SESSION["alunim"];  
-    $alul = query("SELECT * FROM alumni WHERE nim = $alunim");
-    if($alul == false) {
-        header("Location: allregristasi.php");
+    if(isset($_SESSION["alulogin"])) {
+        $alunim = $_SESSION["alunim"];  
+        $alul = query("SELECT * FROM alumni WHERE nim = $alunim");
+        if($alul == false) {
+            header("Location: local.php");
+        }
     }
 
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
@@ -62,7 +64,6 @@
     <br>
     <h3><a href="local.php">Logout</a></h3>
     <h3><a href=tambah.php>Tambah Data</a></h3>
-    <h3><a href=regristasi.php>Daftar</a></h3>
     <h3><a href=profil.php>Lihat Profil</a></h3>
 </body>
 </html>

@@ -1,13 +1,11 @@
 <?php
+    /*
+    session_start();
 
-session_start();
-
-if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
-    echo "<script>alert('Logout dulu')</script>";
-    echo "<script>window.location.href = 'index.php'</script>";
-    exit;
-}
-
+    if(isset($_SESSION["alulogin"])) {
+        header("Location: index.php");
+    }
+    */
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +14,7 @@ if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Regristasi</title>
 </head>
 <body>
     <h1>Pilih Regristasi</h1>

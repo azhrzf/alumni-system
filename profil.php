@@ -5,6 +5,7 @@
 
     if(isset($_SESSION["login"])) {
         echo "<h3>Selamat kamu adalah admin</h3>";
+        exit;
     }
 ?> 
 
@@ -38,22 +39,22 @@
     <table>
         <tr>
             <td><label for="nim">NIM</label></td>
-            <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>" disabled required></td>
+            <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>" size="40" disabled required></td>
         </tr>
         <tr>
             <td><label for="nama">Nama</label></td>
-            <td><input type="text" name="nama" id="nama" value="<?= $nama; ?>" disabled required></td>
+            <td><input type="text" name="nama" id="nama" value="<?= $nama; ?>" size="40" disabled required></td>
         </tr>
         <tr>
             <td><label for="prodi">Program Studi</label></td>
-            <td><input type="text" name="prodi" id="prodi" value="<?= $prodi; ?>" disabled required></td>
+            <td><input type="text" name="prodi" id="prodi" value="<?= $prodi; ?>" size="40" disabled required></td>
         </tr>
         <tr>
             <td><label for="thlulus">Tahun Lulus</label></td>
-            <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" disabled required></td>
+            <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" size="40" disabled required></td>
         </tr>
     </table>        
-    <h3><a href=aluganti.php>Ubah Data</a></h3>
+    <h3><a href="aluganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
 </body>
 </html>

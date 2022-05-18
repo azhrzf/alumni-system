@@ -15,6 +15,10 @@
     $hps = hapus($delete);
     $hps2 = hapus($delete2);
 
+    $_SESSION = [];
+    session_unset();
+    session_destroy();
+
     if($hps > 0 ) {
         echo "<script>alert('Data berhasil dihapus')</script>";
         echo "<script>document.location.href = 'allogin.php'</script>";

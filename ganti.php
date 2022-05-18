@@ -4,7 +4,8 @@
     require "functions.php";
 
     if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
-        header("Location: index.php");
+        echo "<script>alert('Mohon hubungi admin jika ada yang salah')</script>";
+        echo "<script>window.location.href = 'index.php'</script>";
         exit;
     }
 
@@ -67,6 +68,6 @@
         <button type="submit" name="ubah">Submit</button>
     </form>
     <h3><a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Konfirmasi hapu')">Hapus</a></h3>
-    <h3><a href=index.php style="text-decoration: none">Halaman utama</a></h3>
+    <h3><a href=index.php>Halaman utama</a></h3>
 </body>
 </html>

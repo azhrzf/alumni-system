@@ -63,6 +63,22 @@
         return mysqli_affected_rows($conn);
     }
 
+    function ubah2($data) {
+        global $conn;
+
+        $id = $data["id"];
+        $nim = test_input($data["nim"]);
+        $nama = test_input($data["nama"]);
+        $prodi = test_input($data["prodi"]);
+        $thlulus = test_input($data["thlulus"]);
+
+        $ubah = "UPDATE alumni SET nama = '$nama', nim = '$nim', prodi = '$prodi', thlulus = '$thlulus' WHERE nim = $nim";
+
+        mysqli_query($conn, $ubah);
+        
+        return mysqli_affected_rows($conn);
+    }
+
     function cari($data) {
 
         $search = "SELECT * FROM alumni WHERE

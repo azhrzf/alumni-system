@@ -5,9 +5,10 @@
     
     if(isset($_SESSION["alulogin"])) {
         header("Location: alutambah.php");
+        exit;
     }
     
-    if(!isset($_SESSION["login"]) || !isset($_SESSION["alulogin"])) {
+    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
         header("Location: index.php");
         exit;
     }

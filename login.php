@@ -4,7 +4,7 @@
     require "functions.php";
 
     if(isset($_SESSION["login"]) && !isset($_SESSION["alulogin"]) || !isset($_SESSION["login"]) && isset($_SESSION["alulogin"])) {
-        echo "<script>window.location.href = 'index.php'</script>";
+        header("Location: index.php");
         exit;
     }
 
@@ -67,10 +67,13 @@
     <title>Login Admin</title>
 </head>
 <body>
+    <?php if(isset($error)) {
+            echo "<script>alert('Username atau password salah')</script>";
+            echo "<script>window.location.href = 'local.php'</script>";
+        exit;
+        }
+    ?>
     <h1>Login</h1>
-    <?php if(isset($error)) : ?>
-        <p>Username or Paswot salah</p>
-    <?php endif; ?>
     <form action="" method="post">
         <table>
             <tr>
