@@ -1,13 +1,13 @@
 <?php
+    // destroy session
+    session_start();
+    $_SESSION = [];
+    session_unset();
+    session_destroy();
 
-session_start();
-$_SESSION = [];
-session_unset();
-session_destroy();
+    // destroy cookie
+    setcookie("id", "", time() - 3600);
+    setcookie("key", "", time() - 3600);
 
-setcookie("id", "", time() - 3600);
-setcookie("key", "", time() - 3600);
-
-header("Location: Login.php");
-
+    header("Location: allogin.php");
 ?>

@@ -2,16 +2,21 @@
     session_start();
 
     require "functions.php";
-    
-    if(isset($_SESSION["alulogin"])) {
-        header("Location: alutambah.php");
+
+    if(isset($_SESSION["login"]) || !isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+        echo "<script>alert('Bukan hakmu')</script>";
+        echo "<script>window.location.href = 'index.php'</script>";
         exit;
     }
-    
-    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-        header("Location: index.php");
-        exit;
-    }
+
+    $alunim = $_SESSION["alunim"];
+    $result = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = '$alunim'");
+
+    foreach($result as $tabel) {
+        if ($alunim == $tabel['nim']) {
+            header("Location: aluganti.php");
+        }
+    }       
 
     if(isset($_POST["submit"])) {
         // check apakah data berhasil ditambahkan atau tidak
@@ -36,10 +41,11 @@
 <body>
     <h1>Menambah Data Alumni</h1>
     <form action="" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="nim" value="<?= $_SESSION["alunim"] ?>">
         <table>
             <tr>
                 <td><label for="nim">NIM</label></td>
-                <td><input type="text" name="nim" id="nim" min="11" max="11" required></td>
+                <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled minlength="11" maxlenghth="11" required></td>
             </tr>
             <tr>
                 <td><label for="nama">Nama</label></td>
@@ -56,6 +62,5 @@
         </table>        
         <button type="submit" name="submit">Submit</button>
     </form>
-    <h3><a href=index.php>Halaman Utama</a></h3>
 </body>
 </html>

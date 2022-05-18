@@ -13,44 +13,47 @@
         $id = $_COOKIE["id"];
         $key = $_COOKIE["key"];
 
-        // ambil username berdasarkan id
-        $result = mysqli_query($conn, "SELECT username FROM user WHERE id = $id");
+        // ambil alunim berdasarkan id
+        $result = mysqli_query($conn, "SELECT alunim FROM alu WHERE id = $id");
         $row = mysqli_fetch_assoc($result);
 
-        // cek cookie username
-        if($key === hash('sha256', $row['username'])) {
-            $_SESSION["login"] = true;
+        // cek cookie alunim
+        if($key === hash('sha256', $row['alunim'])) {
+            $_SESSION["alulogin"] = true;
         }
     }
 
-    if(isset($_SESSION["login"])) {
+    if(isset($_SESSION["alulogin"])) {
         header("Location: index.php");
     }
 
     // cek apa tombol submit sudah ditekan atau belum
-    if(isset($_POST["login"])) {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+    if(isset($_POST["alulogin"])) {
+        $alunim = $_POST["alunim"];
+        $alupassword = $_POST["alupassword"];
 
-        // cek username apa ada di databse
-        $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+        // cek alunim apa ada di databse
+        $result = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$alunim'");    
 
-        // cek apa username ada
+        // cek apa alunim ada
         if(mysqli_num_rows($result) === 1) {
             // check password
             $row = mysqli_fetch_assoc($result);
-            if (password_verify($password, $row["password"])) {
+            if (password_verify($alupassword, $row["alupassword"])) {
                 // set session
-                $_SESSION["login"] = true;
+                $_SESSION["alulogin"] = true;
+                foreach($result as $assa) {
+                    $_SESSION["alunim"] = $assa['alunim'];
+                }
                 // remember me
                 if (isset($_POST["remember"])) {
                     // buat cookie
                     setcookie("id", $row['id'], time() + 60);
-                    // mengacak username menggunakan hash
+                    // mengacak alunim menggunakan hash
                     // algoritma + string
-                    setcookie("key", hash('sha256', $row['username']), time() + 60);
+                    setcookie("key", hash('sha256', $row['alunim']), time() + 60);
                 }
-                header("Location: index.php");
+                header("Location: aluganti.php");
                 exit;
             }
         }
@@ -64,30 +67,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin</title>
+    <title>Login Alumni</title>
 </head>
 <body>
+    <h1>Login Alumni</h1>
     <?php if(isset($error)) {
             echo "<script>alert('Username atau password salah')</script>";
             echo "<script>window.location.href = 'local.php'</script>";
         exit;
         }
     ?>
-    <h1>Login</h1>
     <form action="" method="post">
         <table>
             <tr>
-                <td><label for="username">Username</label></td>
-                <td><input type="text" name="username"></td>
+                <td><label for="alunim">NIM</label></td>
+                <td><input type="text" name="alunim" id="alunim" minlength="11" maxlength="11" required></td>
             </tr>
             <tr>
-                <td><label for="password">Password</label></td>
-                <td><input type="password" name="password"></td>
+                <td><label for="alupassword">Password</label></td>
+                <td><input type="password" name="alupassword" id="alupassword" required></td>
             </tr>
-                <td><label for="remember">Remember me</label></td>
+                <td><label for="remember">remember:</label></td>
                 <td><input type="checkbox" name="remember"></td>
         </table>
-        <button type="submit" name="login">Login</button>
+        <button type="submit" name="alulogin">Submit</button>
     </form>
     <h3><a href=allregristasi.php>Regristasi</a></h3>
 </body>

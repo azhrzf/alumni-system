@@ -1,29 +1,29 @@
 <?php
+    session_start();
 
-session_start();
+    require "functions.php";
 
-if(!isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
-
-    require("functions.php");
-    $id = $_GET['id'];
-    $delete = "DELETE FROM alumni WHERE id=$id";
-
-    $hps = hapus($delete);
-
-    if($hps > 0 ) {
-        echo "<script>
-            alert('data berhasil dihapys');
-            document.location.href = 'index.php';
-        </script>";
+    if(!isset($_SESSION["login"]) && !isset ($_SESSION["alulogin"])){
+        header("Location: login.php");
+        exit;
     }
 
+    $nim = $_GET['nim'];
+    $delete = "DELETE FROM alumni WHERE nim = $nim";
+    $delete2 = "DELETE FROM alu WHERE alunim = $nim";
+
+    $hps = hapus($delete);
+    $hps2 = hapus($delete2);
+
+    $_SESSION = [];
+    session_unset();
+    session_destroy();
+
+    if($hps > 0 ) {
+        echo "<script>alert('Data berhasil dihapus')</script>";
+        echo "<script>document.location.href = 'allogin.php'</script>";
+    }
     else {
-        echo "<script>
-        alert('data gagal dihapus');
-        document.location.href = 'index.php';
-    </script>";
+        echo "<script>alert('Data gagal dihapus')</script>";
     }   
 ?>

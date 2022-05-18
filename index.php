@@ -1,13 +1,22 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION["login"])) {
-        header("Location: login.php");
+    // menghubungkan ke function
+    require "functions.php";
+
+    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+        header("Location: alllogin.php");
         exit;
     }
 
-    // menghubungkan ke function
-    require "functions.php";
+    if(isset($_SESSION["alulogin"])) {
+        $alunim = $_SESSION["alunim"];  
+        $alul = query("SELECT * FROM alumni WHERE nim = $alunim");
+        if($alul == false) {
+            header("Location: local.php");
+        }
+    }
+
     $alumni = query("SELECT * FROM alumni ORDER BY nim ASC");
 
     if(isset($_POST["cari"])) {
@@ -21,17 +30,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sistem Informasi Alumni</title>
 </head>
 <body>
-    <a href="local.php">Logout</a>
-    <h3><a href=tambah.php style="text-decoration: none">Tambah Data</a></h3>
-    <h3><a href=regristasi.php style="text-decoration: none">Daftar</a></h3>
+    <h1>Sistem Informasi Alumni</h1>
     <form action="" method="post">
-        <input type="text" name="keyword" placeholder="masukkan keyword" autofocus autocomplete="off">
+        <input type="text" name="keyword" placeholder="masukkan keyword" autofocus autocomplete="off" size="30">
         <button type="submit" name="cari">Cari</button>
     </form>
-    
+    <br>
     <table border= "2px solid black" cellpadding="10">
         <tr>
            <th>NO</th>
@@ -54,5 +61,9 @@
                 </tr>
             <?php endforeach; ?>
     </table>
+    <br>
+    <h3><a href="local.php">Logout</a></h3>
+    <h3><a href=tambah.php>Tambah Data</a></h3>
+    <h3><a href=profil.php>Lihat Profil</a></h3>
 </body>
 </html>

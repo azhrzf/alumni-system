@@ -1,9 +1,9 @@
 <?php
-
     // koneksi ke database
     $conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 
     // menerima query sql
+
     function query($query) {
         global $conn;
         // ambil data
@@ -63,6 +63,22 @@
         return mysqli_affected_rows($conn);
     }
 
+    function ubah2($data) {
+        global $conn;
+
+        $id = $data["id"];
+        $nim = test_input($data["nim"]);
+        $nama = test_input($data["nama"]);
+        $prodi = test_input($data["prodi"]);
+        $thlulus = test_input($data["thlulus"]);
+
+        $ubah = "UPDATE alumni SET nama = '$nama', nim = '$nim', prodi = '$prodi', thlulus = '$thlulus' WHERE nim = $nim";
+
+        mysqli_query($conn, $ubah);
+        
+        return mysqli_affected_rows($conn);
+    }
+
     function cari($data) {
 
         $search = "SELECT * FROM alumni WHERE
@@ -89,6 +105,7 @@
 
         if (mysqli_fetch_assoc($res)) {
             echo "<script>alert('sudah ada')</script>";
+            echo "<script>window.location.href = 'login.php'</script>";
             return false;
         }
         
@@ -104,6 +121,41 @@
 
         // tambah user baru
         mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password')");
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function aluregristasi($data) {
+        // menerima data dari post
+
+        global $conn;
+
+        $alunim = test_input(strtolower($data["alunim"]));
+        // memungkinkan tanda "" dalam database
+        $alupassword = mysqli_real_escape_string($conn, $data["alupassword"]);
+        $konalupassword = mysqli_real_escape_string($conn, $data["konalupassword"]);
+
+        // cek alunim
+        $res = mysqli_query($conn, "SELECT alunim FROM alu WHERE alunim = '$alunim'");
+
+        if (mysqli_fetch_assoc($res)) {
+            echo "<script>alert('sudah ada')</script>";
+            echo "<script>window.location.href = 'alulogin.php'</script>";
+            return false;
+        }
+        
+        // cek konfirmasi alupassword
+        if ($alupassword !== $konalupassword) {
+            echo "<script>alert('konfirmasi salah')</script>";
+            return false;
+        }
+
+        // enkripsi alupassword
+        // alupassword_hash, mengacak menggunakan algoritma default
+        $alupassword = password_hash($alupassword, PASSWORD_DEFAULT);
+
+        // tambah alu baru
+        mysqli_query($conn, "INSERT INTO alu VALUES('', '$alunim', '$alupassword')");
 
         return mysqli_affected_rows($conn);
     }
