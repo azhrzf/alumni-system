@@ -1,9 +1,4 @@
 <?php
-
-if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-    header("Location: index.php");
-    exit;
-}
     // koneksi ke database
     $conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 

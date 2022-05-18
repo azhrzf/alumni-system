@@ -1,55 +1,47 @@
 <?php
+    session_start();
 
-session_start();
+    require "functions.php";
 
-if(isset($_SESSION["alulogin"])) {
-    echo "<script>alert('ask admin or login admin')</script>";
-    echo "<script>window.location.href = 'index.php'</script>";
-    exit;
-}
+    if(!isset($_SESSION["login"]) || !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
+        header("Location: index.php");
+        exit;
+    }
 
-if(!isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
+    $id = $_GET['id'];
+    $alumni = query("SELECT * FROM alumni WHERE id = $id");
+    foreach($alumni as $tabel) {
+        $nim = $tabel['nim'];
+        $nama = $tabel['nama'];
+        $prodi = $tabel['prodi'];
+        $thlulus = $tabel['thlulus'];
+    }
 
-require "functions.php";
+    if(isset($_POST["ubah"])) {
 
-$id = $_GET['id'];
-$alumni = query("SELECT * FROM alumni WHERE id = $id");
-foreach($alumni as $tabel) {
-    $nim = $tabel['nim'];
-    $nama = $tabel['nama'];
-    $prodi = $tabel['prodi'];
-    $thlulus = $tabel['thlulus'];
-}
+        // check apakah data berhasil ditambahkan atau tidak
 
-if(isset($_POST["ubah"])) {
+        if(ubah($_POST) > 0 ) {
+            echo "<script>
+                alert('data berhasil ditambahkan');
+                document.location.href = 'index.php';
+            </script>";
+        }
 
-    // check apakah data berhasil ditambahkan atau tidak
+        else if ($tabel) {
+            echo "<script>
+                alert('data berhasil ditambahkan');
+                document.location.href = 'index.php';
+            </script>";
+        }
 
-    if(ubah($_POST) > 0 ) {
-        echo "<script>
-            alert('data berhasil ditambahkan');
+        else {
+            echo "<script>
+            alert('data gagal ditambahkan');
             document.location.href = 'index.php';
         </script>";
+        }
     }
-
-    else if ($tabel) {
-        echo "<script>
-            alert('data berhasil ditambahkan');
-            document.location.href = 'index.php';
-        </script>";
-    }
-
-    else {
-        echo "<script>
-        alert('data gagal ditambahkan');
-        document.location.href = 'index.php';
-    </script>";
-    }
-}
-
 ?>
 
 <!DOCTYPE html>

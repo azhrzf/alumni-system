@@ -21,6 +21,6 @@ session_start();
     <h3><a href=alulogin.php style="text-decoration: none">login Alumni</a></h3>
     <br>
     <h1>Pilih Regristasi</h1>
-    <h3><a href=allregristasi.php style="text-decoration: none">Regristasi Admin</a></h3>
+    <h3><a href=allregristasi.php style="text-decoration: none">Regristasi</a></h3>
 </body>
 </html>

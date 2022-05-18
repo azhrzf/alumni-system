@@ -1,13 +1,13 @@
 <?php
 session_start();
 
+require "functions.php";
+
 if(isset($_SESSION["login"]) || isset($_SESSION["alulogin"])) {
     echo "<script>alert('Logout dulu')</script>";
     echo "<script>window.location.href = 'index.php'</script>";
     exit;
 }
-
-$conn = mysqli_connect("localhost", "root", "", "sistem_alumni");
 
 // cek cookie
 if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {
