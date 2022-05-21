@@ -72,7 +72,7 @@
         $prodi = test_input($data["prodi"]);
         $thlulus = test_input($data["thlulus"]);
 
-        $ubah = "UPDATE alumni SET nama = '$nama', nim = '$nim', prodi = '$prodi', thlulus = '$thlulus' WHERE nim = $nim";
+        $ubah = "UPDATE alumni SET id = '$id', nama = '$nama', nim = '$nim', prodi = '$prodi', thlulus = '$thlulus' WHERE nim = $nim";
 
         mysqli_query($conn, $ubah);
         

@@ -39,7 +39,7 @@
         <table>
             <tr>
                 <td><label for="nim">NIM</label></td>
-                <td><input type="text" name="nim" id="nim" min="11" max="11" required></td>
+                <td><input type="text" name="nim" id="nim" minlength="11" maxlength="11" required></td>
             </tr>
             <tr>
                 <td><label for="nama">Nama</label></td>

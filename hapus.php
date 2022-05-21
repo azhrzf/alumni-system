@@ -14,14 +14,16 @@
 
     $hps = hapus($delete);
     $hps2 = hapus($delete2);
+    
+    if (isset ($_SESSION["alulogin"])) {
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+    }
 
-    $_SESSION = [];
-    session_unset();
-    session_destroy();
-
-    if($hps > 0 ) {
+    if($hps && $hps2 > 0 ) {
         echo "<script>alert('Data berhasil dihapus')</script>";
-        echo "<script>document.location.href = 'allogin.php'</script>";
+        echo "<script>document.location.href = 'index.php'</script>";
     }
     else {
         echo "<script>alert('Data gagal dihapus')</script>";

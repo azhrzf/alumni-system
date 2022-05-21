@@ -87,7 +87,7 @@
                 <td><label for="alupassword">Password</label></td>
                 <td><input type="password" name="alupassword" id="alupassword" required></td>
             </tr>
-                <td><label for="remember">remember:</label></td>
+                <td><label for="remember">Remember me</label></td>
                 <td><input type="checkbox" name="remember"></td>
         </table>
         <button type="submit" name="alulogin">Submit</button>

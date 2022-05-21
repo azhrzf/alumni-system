@@ -10,6 +10,7 @@
 
     if(isset($_SESSION["alulogin"])) {
         header("Location: index.php");
+
         exit;
     }
 
@@ -51,10 +52,11 @@
     <h1>Perbarui Data</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="nim" value="<?= $nim ?>">
         <table>
             <tr>
-                <td><label for="nim">NIM</label></td>
-                <td><input type="text" name="nim" id="nim" value="<?= $nim; ?>" min="11" max="11" required></td>
+                <td><label for="shownim">NIM</label></td>
+                <td><input type="text" name="shownim" id="shownim" value="<?= $nim; ?>" disabled required></td>
             </tr>
             <tr>
                 <td><label for="nama">Nama</label></td>
@@ -71,7 +73,7 @@
         </table>        
         <button type="submit" name="ubah">Submit</button>
     </form>
-    <h3><a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Konfirmasi hapu')">Hapus</a></h3>
+    <h3><a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Konfirmasi hapus')">Hapus</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
 </body>
 </html>

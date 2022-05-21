@@ -11,7 +11,7 @@
     }
 
     if (empty(isset($_GET["nim"]))) {
-        $alunim = $_SESSION["alulogin"];
+        $alunim = $_SESSION["alunim"];
     }
     else {
         $alunim = $_GET["nim"];  
@@ -24,6 +24,7 @@
     }
 
     foreach($alumni as $tabel) {
+        $id = $tabel['id'];
         $nim = $tabel['nim'];
         $nama = $tabel['nama'];
         $prodi = $tabel['prodi'];
@@ -58,23 +59,23 @@
         <input type="hidden" name="nim" value="<?= $nim ?>">
         <table>
             <tr>
-                <td><label for="acakadut">acakadut:</label></td>
-                <td><input type="text" name="acakadut" id="acakadut" value="<?= $nim; ?>" minlength="11" maxlength="11" disabled required></td>
+                <td><label for="shownim">NIM</label></td>
+                <td><input type="text" name="shownim" id="acakadut" value="<?= $nim; ?>" minlength="11" maxlength="11" disabled required></td>
             </tr>
             <tr>
-                <td><label for="nama">nama:</label></td>
+                <td><label for="nama">Nama:</label></td>
                 <td><input type="text" name="nama" id="nama" value="<?= $nama; ?>" required></td>
             </tr>
             <tr>
-                <td><label for="prodi">prodi:</label></td>
+                <td><label for="prodi">Prodi</label></td>
                 <td><input type="text" name="prodi" id="prodi" value="<?= $prodi; ?>" required></td>
             </tr>
             <tr>
-                <td><label for="thlulus">thlulus:</label></td>
+                <td><label for="thlulus">Tahun Lulus</label></td>
                 <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" required></td>
             </tr>
         </table>        
-        <button type="submit" name="ubah">submit</button>
+        <button type="submit" name="ubah">Submit</button>
     </form>
     <h3><a href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Yakin')">Hapus</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
