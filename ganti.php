@@ -3,9 +3,13 @@
 
     require "functions.php";
 
-    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"]) || isset($_SESSION["alulogin"])) {
-        echo "<script>alert('Mohon hubungi admin jika ada yang salah')</script>";
-        echo "<script>window.location.href = 'index.php'</script>";
+    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+        header("Location: index.php");
+        exit;
+    }
+
+    if(isset($_SESSION["alulogin"])) {
+        header("Location: index.php");
         exit;
     }
 

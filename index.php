@@ -45,25 +45,27 @@
            <th>NIM</th>
            <th>Nama</th>
            <th>Program Studi</th>
-           <th>Tahun Lulus</th>
-           <th>Tracer</th> 
+           <th>Tahun Lulus</th> 
         </tr>
 
         <?php $no = 1; ?>
             <?php foreach($alumni as $tabel) : ?>
                 <tr>
                     <td><?php echo $no++; ?></td>
-                    <td><?php echo $tabel["nim"]; ?></td>
+                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>"><?php echo $tabel["nim"]; ?></a></td>
                     <td><?php echo $tabel["nama"]; ?></td>
                     <td><?php echo $tabel["prodi"]; ?></td>
                     <td><?php echo $tabel["thlulus"]; ?></td>
-                    <td><a href="ganti.php?id=<?= $tabel['id']; ?>">Tracer</a></td>
                 </tr>
             <?php endforeach; ?>
     </table>
     <br>
     <h3><a href="local.php">Logout</a></h3>
-    <h3><a href=tambah.php>Tambah Data</a></h3>
+    <?php 
+        if (isset($_SESSION["login"])) {
+            echo "<h3><a href=tambah.php>Tambah Data</a></h3>";
+        }
+    ?>
     <h3><a href=profil.php>Lihat Profil</a></h3>
 </body>
 </html>

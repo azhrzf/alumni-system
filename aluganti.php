@@ -10,7 +10,12 @@
         exit;
     }
 
-    $alunim = $_GET["nim"];  
+    if (empty(isset($_GET["nim"]))) {
+        $alunim = $_SESSION["alulogin"];
+    }
+    else {
+        $alunim = $_GET["nim"];  
+    }
     $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
     if($alumni == false) {
         echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
