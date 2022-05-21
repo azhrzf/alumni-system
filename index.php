@@ -5,7 +5,7 @@
     require "functions.php";
 
     if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
-        header("Location: alllogin.php");
+        header("Location: allogin.php");
         exit;
     }
 
