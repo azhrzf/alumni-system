@@ -15,7 +15,7 @@
     $alumni = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = $alunim");
     if($alumni == false) {
         echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
-        echo "<script>window.location.href = 'alutambah.php'</script>";
+        echo "<script>window.location.href = 'tambah.php'</script>";
     }
     foreach($alumni as $tabel) {
         $nim = $tabel['nim'];

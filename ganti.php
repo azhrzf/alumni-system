@@ -31,7 +31,7 @@
         
         if ($alumni == false) {
             echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
-            echo "<script>window.location.href = 'alutambah.php'</script>";
+            echo "<script>window.location.href = 'tambah.php'</script>";
             exit;
         }
 

@@ -8,6 +8,17 @@
         exit;
     }
 
+    if (isset($_SESSION["alulogin"])) {
+        $alunim = $_SESSION["alunim"];
+        $result = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = '$alunim'");
+
+        foreach($result as $tabel) {
+            if ($alunim == $tabel['nim']) {
+                header("Location: ganti.php");
+            }
+        }   
+    }
+
     if(isset($_POST["submit"])) {
         // check apakah data berhasil ditambahkan atau tidak
         if(tambah($_POST) > 0 ) {
@@ -31,9 +42,15 @@
 <body>
     <h1>Menambah Data Alumni</h1>
     <form action="" method="POST" enctype="multipart/form-data">
+        <?php if (isset($_SESSION["alulogin"])) : ?>
+        <input type="hidden" name="nim" value="<?= $_SESSION["alunim"] ?>">
+        <?php endif ?>
         <table>
             <tr>
                 <td><label for="nim">NIM</label></td>
+                <?php if (isset($_SESSION["alulogin"])) : ?>
+                    <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled minlength="11" maxlenghth="11" required></td>
+                <?php endif ?>
                 <td><input type="text" name="nim" id="nim" minlength="11" maxlength="11" required></td>
             </tr>
             <tr>
