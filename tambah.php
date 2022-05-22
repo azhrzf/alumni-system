@@ -51,7 +51,9 @@
                 <?php if (isset($_SESSION["alulogin"])) : ?>
                     <td><input type="text" name="acakadut" id="nim" value=<?php echo $_SESSION["alunim"]; ?> disabled minlength="11" maxlenghth="11" required></td>
                 <?php endif ?>
-                <td><input type="text" name="nim" id="nim" minlength="11" maxlength="11" required></td>
+                <?php if (isset($_SESSION["login"])) : ?>
+                    <td><input type="text" name="nim" id="nim" minlength="11" maxlength="11" required></td>
+                <?php endif ?>
             </tr>
             <tr>
                 <td><label for="nama">Nama</label></td>

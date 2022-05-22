@@ -39,62 +39,64 @@
         $username = $_POST["username"];
         $password = $_POST["password"];
         
-        if (isset($_POST["loginAdmin"])) {
-            // cek username apa ada di databse
-            $resultAdmin = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+        if (isset($_POST["login"])) {
 
-            // cek apa username ada
-            if(mysqli_num_rows($resultAdmin) === 1) {
-                // check password
-                $row = mysqli_fetch_assoc($resultAdmin);
-                if (password_verify($password, $row["password"])) {
-                    // set session
-                    $_SESSION["login"] = true;
-                    foreach($resultAdmin as $assa) {
-                        $_SESSION["username"] = $assa['username'];
+            if ($_POST["login"] = "loginAdmin") {
+                // cek username apa ada di databse
+                $resultAdmin = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+                // cek apa username ada
+                if(mysqli_num_rows($resultAdmin) === 1) {
+                    // check password
+                    $row = mysqli_fetch_assoc($resultAdmin);
+                    if (password_verify($password, $row["password"])) {
+                        // set session
+                        $_SESSION["login"] = true;
+                        foreach($resultAdmin as $assa) {
+                            $_SESSION["username"] = $assa['username'];
+                        }
+                        // remember me
+                        if (isset($_POST["remember"])) {
+                            // buat cookie
+                            setcookie("id", $row['id'], time() + 60);
+                            // mengacak username menggunakan hash
+                            // algoritma + string
+                            setcookie("key", hash('sha256', $row['username']), time() + 60);
+                        }
+                        header("Location: index.php");
+                        exit;
                     }
-                    // remember me
-                    if (isset($_POST["remember"])) {
-                        // buat cookie
-                        setcookie("id", $row['id'], time() + 60);
-                        // mengacak username menggunakan hash
-                        // algoritma + string
-                        setcookie("key", hash('sha256', $row['username']), time() + 60);
-                    }
-                    header("Location: index.php");
-                    exit;
                 }
             }
-            $error = true;
-        }
 
-        elseif (isset($_POST["loginAlumni"])) {
-            // cek alunim apa ada di databse
-            $resultAlumni = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$username'");    
-
-            // cek apa alunim ada
-            if(mysqli_num_rows($resultAlumni) === 1) {
-                // check password
-                $row = mysqli_fetch_assoc($resultAlumni);
-                if (password_verify($password, $row["alupassword"])) {
-                    // set session
-                    $_SESSION["alulogin"] = true;
-                    foreach($resultAlumni as $assa) {
-                        $_SESSION["alunim"] = $assa['alunim'];
+            elseif ($_POST["login"] = "loginAlumni") {
+                // cek alunim apa ada di databse
+                $resultAlumni = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$username'");    
+    
+                // cek apa alunim ada
+                if(mysqli_num_rows($resultAlumni) === 1) {
+                    // check password
+                    $row = mysqli_fetch_assoc($resultAlumni);
+                    if (password_verify($password, $row["alupassword"])) {
+                        // set session
+                        $_SESSION["alulogin"] = true;
+                        foreach($resultAlumni as $assa) {
+                            $_SESSION["alunim"] = $assa['alunim'];
+                        }
+                        // remember me
+                        if (isset($_POST["remember"])) {
+                            // buat cookie
+                            setcookie("id", $row['id'], time() + 60);
+                            // mengacak alunim menggunakan hash
+                            // algoritma + string
+                            setcookie("key", hash('sha256', $row['alunim']), time() + 60);
+                        }
+                        header("Location: ganti.php");
+                        exit;
                     }
-                    // remember me
-                    if (isset($_POST["remember"])) {
-                        // buat cookie
-                        setcookie("id", $row['id'], time() + 60);
-                        // mengacak alunim menggunakan hash
-                        // algoritma + string
-                        setcookie("key", hash('sha256', $row['alunim']), time() + 60);
-                    }
-                    header("Location: ganti.php");
-                    exit;
                 }
             }
-            $error = true;
+        $error = true;
         }
         echo "Pilih admin/alumni";
     }
@@ -131,10 +133,10 @@
                 <td><input type="checkbox" name="remember"></td>
             </tr>
             <tr>
-                <td><input type="radio" name="loginAlumni" value="loginAlumni">
-                <label for="loginAlumni">Alumni</label></td>
-                <td><input type="radio" name="loginAdmin" value="loginAdmin">
-                <label for="loginAdmin">Admin</label></td>
+                <td><input type="radio" name="login" value="loginAlumni">
+                <label for="login">Alumni</label></td>
+                <td><input type="radio" name="login" value="loginAdmin">
+                <label for="login">Admin</label></td>
             </tr>
         </table>
         <button type="submit" name="login">Login</button>
