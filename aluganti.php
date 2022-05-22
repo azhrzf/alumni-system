@@ -13,17 +13,20 @@
     if (empty(isset($_GET["nim"]))) {
         $alunim = $_SESSION["alunim"];
     }
+    
     else {
         $alunim = $_GET["nim"];  
     }
+    
     $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
-    if($alumni == false) {
+    
+    if ($alumni == false) {
         echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
         echo "<script>window.location.href = 'alutambah.php'</script>";
         exit;
     }
 
-    foreach($alumni as $tabel) {
+    foreach ($alumni as $tabel) {
         $id = $tabel['id'];
         $nim = $tabel['nim'];
         $nama = $tabel['nama'];
@@ -35,6 +38,10 @@
 
         // check apakah data berhasil ditambahkan atau tidak
         if(ubah2($_POST) > 0 ) {
+            echo "<script>alert('Selamat data berhasil diperbarui')</script>";
+            echo "<script>window.location.href = 'index.php'</script>";
+        }
+        else if ($tabel) {
             echo "<script>alert('Selamat data berhasil diperbarui')</script>";
             echo "<script>window.location.href = 'index.php'</script>";
         }
