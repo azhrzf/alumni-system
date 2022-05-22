@@ -15,7 +15,7 @@
     $alumni = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = $alunim");
     if($alumni == false) {
         echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
-        echo "<script>window.location.href = 'alutambah.php'</script>";
+        echo "<script>window.location.href = 'tambah.php'</script>";
     }
     foreach($alumni as $tabel) {
         $nim = $tabel['nim'];
@@ -55,7 +55,7 @@
             <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" size="40" disabled required></td>
         </tr>
     </table>        
-    <h3><a href="aluganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
+    <h3><a href="ganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
     <h3><a href=gantipass.php>Ganti Password</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
 </body>
