@@ -10,27 +10,24 @@
 
     // jika ditekan jalankan regristasi
     if (isset($_POST["register"])) {
-        if (isset($_POST["regtype"])) {
-            if ($_POST["regtype"] = "regAdmin") {
-                if (regristasi($_POST) > 0) {
-                    echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
-                    echo "<script>window.location.href = 'login.php'</script>";
-                }
-                else {
-                    echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
-                }
+        if ($_POST["regtype"] == "regAdmin") {
+            if (regristasi($_POST) > 0) {
+                echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
+                echo "<script>window.location.href = 'login.php'</script>";
             }
-            if ($_POST["regtype"] = "regAlumni") {
-                if (aluregristasi($_POST) > 0) {
-                    echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
-                    echo "<script>window.location.href = 'login.php'</script>";
-                }
-                else {
-                    echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
-                }
+            else {
+                echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
             }
         }
-        echo "Pilih admin/alumni";
+        else if ($_POST["regtype"] == "regAlumni") {
+            if (aluregristasi($_POST) > 0) {
+                echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
+                echo "<script>window.location.href = 'login.php'</script>";
+            }
+            else {
+                echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
+            }
+        }
     }
 ?>
 
@@ -59,10 +56,10 @@
             <td><input type="password" name="konpassword" id="konpassword" required></td>
         </tr>
         <tr>
+            <td><input type="radio" name="regtype" value="regAdmin" checked>
+            <label for="regAdmin">Admin</label></td>
             <td><input type="radio" name="regtype" value="regAlumni">
-            <label for="regtype">Alumni</label></td>
-            <td><input type="radio" name="regtype" value="regAdmin">
-            <label for="regtype">Admin</label></td>
+            <label for="regAlumni">Alumni</label></td>
         </tr>
     </table>
     <button type="submit" name="register">Regristasi</button>

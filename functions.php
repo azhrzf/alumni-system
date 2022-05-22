@@ -102,8 +102,9 @@
 
         // cek username
         $res = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+        $res2 = mysqli_query($conn, "SELECT alunim FROM alu WHERE alunim = '$username'");
 
-        if (mysqli_fetch_assoc($res)) {
+        if (mysqli_fetch_assoc($res) || mysqli_fetch_assoc($res2)) {
             echo "<script>alert('sudah ada')</script>";
             echo "<script>window.location.href = 'login.php'</script>";
             return false;
@@ -137,8 +138,9 @@
 
         // cek username
         $res = mysqli_query($conn, "SELECT alunim FROM alu WHERE alunim = '$username'");
+        $res2 = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
 
-        if (mysqli_fetch_assoc($res)) {
+        if (mysqli_fetch_assoc($res) || mysqli_fetch_assoc($res2)) {
             echo "<script>alert('sudah ada')</script>";
             echo "<script>window.location.href = 'login.php'</script>";
             return false;

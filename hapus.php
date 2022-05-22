@@ -15,10 +15,12 @@
     $hps = hapus($delete);
     $hps2 = hapus($delete2);
     
-    if (isset ($_SESSION["alulogin"])) {
+    if (isset($_SESSION["alulogin"])) {
         $_SESSION = [];
         session_unset();
         session_destroy();
+        setcookie("id", "", time() - 3600);
+        setcookie("key", "", time() - 3600);
     }
 
     if($hps && $hps2 > 0 ) {
