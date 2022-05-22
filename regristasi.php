@@ -28,6 +28,7 @@
                 echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
             }
         }
+        echo "Pilih admin/alumni";
     }
 ?>
 

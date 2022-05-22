@@ -14,7 +14,7 @@
 
     foreach($result as $tabel) {
         if ($alunim == $tabel['nim']) {
-            header("Location: aluganti.php");
+            header("Location: ganti.php");
         }
     }       
 

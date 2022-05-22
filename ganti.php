@@ -3,28 +3,48 @@
 
     require "functions.php";
 
-    if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
+    if(!isset($_SESSION["alulogin"]) && !isset($_SESSION["alulogin"])) {
         header("Location: index.php");
         exit;
     }
 
-    if(isset($_SESSION["alulogin"])) {
-        header("Location: index.php");
-
-        exit;
+    if (isset($_SESSION["login"])) {
+        $id = $_GET['id'];
+        $alumni = query("SELECT * FROM alumni WHERE id = $id");
+        foreach($alumni as $tabel) {
+            $nim = $tabel['nim'];
+            $nama = $tabel['nama'];
+            $prodi = $tabel['prodi'];
+            $thlulus = $tabel['thlulus'];
+        }
     }
 
-    $id = $_GET['id'];
-    $alumni = query("SELECT * FROM alumni WHERE id = $id");
-    foreach($alumni as $tabel) {
-        $nim = $tabel['nim'];
-        $nama = $tabel['nama'];
-        $prodi = $tabel['prodi'];
-        $thlulus = $tabel['thlulus'];
+    elseif ($_SESSION["alulogin"]) {
+        if (empty(isset($_GET["nim"]))) {
+            $alunim = $_SESSION["alunim"];
+        }
+        else {
+            $alunim = $_GET["nim"];  
+        }
+        
+        $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
+        
+        if ($alumni == false) {
+            echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
+            echo "<script>window.location.href = 'alutambah.php'</script>";
+            exit;
+        }
+
+        foreach ($alumni as $tabel) {
+            $id = $tabel['id'];
+            $nim = $tabel['nim'];
+            $nama = $tabel['nama'];
+            $prodi = $tabel['prodi'];
+            $thlulus = $tabel['thlulus'];
+        }
     }
 
     if(isset($_POST["ubah"])) {
-
         // check apakah data berhasil ditambahkan atau tidak
         if(ubah($_POST) > 0 ) {
             echo "<script>alert('Selamat data berhasil diperbarui')</script>";

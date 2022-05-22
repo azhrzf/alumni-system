@@ -67,6 +67,7 @@
             }
             $error = true;
         }
+
         elseif (isset($_POST["loginAlumni"])) {
             // cek alunim apa ada di databse
             $resultAlumni = mysqli_query($conn, "SELECT * FROM alu WHERE alunim = '$username'");    
@@ -89,12 +90,13 @@
                         // algoritma + string
                         setcookie("key", hash('sha256', $row['alunim']), time() + 60);
                     }
-                    header("Location: aluganti.php");
+                    header("Location: ganti.php");
                     exit;
                 }
             }
             $error = true;
         }
+        echo "Pilih admin/alumni";
     }
 ?>
 
@@ -118,11 +120,11 @@
         <table>
             <tr>
                 <td><label for="username">Username</label></td>
-                <td><input type="text" name="username"></td>
+                <td><input type="text" name="username" required></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input type="password" name="password"></td>
+                <td><input type="password" name="password" required></td>
             </tr>
             <tr>
                 <td><label for="remember">Remember me</label></td>

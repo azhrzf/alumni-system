@@ -55,7 +55,7 @@
             <td><input type="text" name="thlulus" id="thlulus" value="<?= $thlulus; ?>" size="40" disabled required></td>
         </tr>
     </table>        
-    <h3><a href="aluganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
+    <h3><a href="ganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
     <h3><a href=gantipass.php>Ganti Password</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
 </body>
