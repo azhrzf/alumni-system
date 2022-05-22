@@ -5,6 +5,7 @@
 
     if(isset($_SESSION["login"])) {
         echo "<h3>Selamat kamu adalah admin</h3>";
+        echo "<h3><a href=gantipass.php>Ganti Password</a></h3>";
         exit;
     }
 ?> 
@@ -55,6 +56,7 @@
         </tr>
     </table>        
     <h3><a href="aluganti.php?nim=<?= $alunim; ?>">Ubah Data</a></h3>
+    <h3><a href=gantipass.php>Ganti Password</a></h3>
     <h3><a href=index.php>Halaman utama</a></h3>
 </body>
 </html>

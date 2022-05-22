@@ -42,6 +42,9 @@
             if (password_verify($password, $row["password"])) {
                 // set session
                 $_SESSION["login"] = true;
+                foreach($result as $assa) {
+                    $_SESSION["username"] = $assa['username'];
+                }
                 // remember me
                 if (isset($_POST["remember"])) {
                     // buat cookie
