@@ -2,60 +2,31 @@
     session_start();
 
     require "functions.php";
-
+    
     if(!isset($_SESSION["login"]) && !isset($_SESSION["alulogin"])) {
         header("Location: index.php");
         exit;
     }
 
-    if (isset($_SESSION["login"])) {
-        $id = $_GET['id'];
-        $alumni = query("SELECT * FROM alumni WHERE id = $id");
-        foreach($alumni as $tabel) {
-            $nim = $tabel['nim'];
-            $nama = $tabel['nama'];
-            $prodi = $tabel['prodi'];
-            $thlulus = $tabel['thlulus'];
-        }
+    if (isset($_SESSION["alulogin"])) {
+        $alunim = $_SESSION["alunim"];
+        $result = mysqli_query($conn, "SELECT * FROM alumni WHERE nim = '$alunim'");
+
+        foreach($result as $tabel) {
+            if ($alunim == $tabel['nim']) {
+                header("Location: ganti.php");
+            }
+        }   
     }
 
-    elseif ($_SESSION["alulogin"]) {
-        if (empty(isset($_GET["nim"]))) {
-            $alunim = $_SESSION["alunim"];
-        }
-        else {
-            $alunim = $_GET["nim"];  
-        }
-        
-        $alumni = query("SELECT * FROM alumni WHERE nim = $alunim");
-        
-        if ($alumni == false) {
-            echo "<script>alert('Daftarkan data terlebih dahulu')</script>";
-            echo "<script>window.location.href = 'tambah.php'</script>";
-            exit;
-        }
-
-        foreach ($alumni as $tabel) {
-            $id = $tabel['id'];
-            $nim = $tabel['nim'];
-            $nama = $tabel['nama'];
-            $prodi = $tabel['prodi'];
-            $thlulus = $tabel['thlulus'];
-        }
-    }
-
-    if(isset($_POST["ubah"])) {
+    if(isset($_POST["submit"])) {
         // check apakah data berhasil ditambahkan atau tidak
-        if(ubah($_POST) > 0 ) {
-            echo "<script>alert('Selamat data berhasil diperbarui')</script>";
-            echo "<script>window.location.href = 'pencarian.php'</script>";
-        }
-        else if ($tabel) {
-            echo "<script>alert('Selamat data berhasil diperbarui')</script>";
-            echo "<script>window.location.href = 'pencarian.php'</script>";
+        if(tambah($_POST) > 0 ) {
+            echo "<script>alert('Selamat data berhasil ditambahkan')</script>";
+            echo "<script>window.location.href = 'index.php'</script>";
         }
         else {
-            echo "<script>alert('Data gagal diperbarui, cek inputan kembali')</script>";
+            echo "<script>alert('Data gagal ditambahkan, cek inputan kembali')</script>";
         }
     }
 ?>
@@ -134,23 +105,41 @@
 
         <div class="login-form">
           <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= $id ?>">
-            <input type="hidden" name="nim" value="<?= $nim ?>">
-
-            <label for="shownim" class="form-label">NIM</label>
+            
+            <?php if (isset($_SESSION["alulogin"])) : ?>
+            <input type="hidden" name="nim" value="<?= $_SESSION["alunim"] ?>">
+            <?php endif ?>
+            
+            <label for="nim" class="form-label">NIM</label>
+            <?php if (isset($_SESSION["alulogin"])) : ?>
             <input
               type="text"
               class="form-control"
-              id="shownim"
+              id="nimAlu"
+              value=<?php echo $_SESSION["alunim"]; ?>
               placeholder=""
-              name="shownim"
+              name="nimAlu"
               minlength= 11
               maxlength= 11
               pattern="[0-9]+"
-              value="<?= $nim; ?>"
               disabled
               required
             />
+            <?php endif ?>
+
+            <?php if (isset($_SESSION["login"])) : ?>
+            <input
+              type="text"
+              class="form-control"
+              id="nim"
+              placeholder=""
+              name="nim"
+              minlength= 11
+              maxlength= 11
+              pattern="[0-9]+"
+              required
+            />
+            <?php endif ?>
 
             <label for="nama" class="form-label">Nama</label>
             <input
@@ -161,7 +150,6 @@
               name="nama"
               maxlength="100"
               pattern="[A-z\s]+"
-              value="<?= $nama; ?>"
               required
             />
 
@@ -174,7 +162,6 @@
               name="prodi"
               maxlength="30"
               pattern="[A-z\s]+"
-              value="<?= $prodi; ?>"
               required
             />
 
@@ -188,15 +175,11 @@
               minlength=4
               maxlength=4
               pattern="[0-9]+"
-              value="<?= $thlulus; ?>"
               required
             />
 
             <a class="submit" href=""
               ><button type="submit" name="submit">Submit</button></a
-            >
-            <a class="submit"  href="hapus.php?nim=<?= $tabel['nim']; ?>" onclick="return confirm('Konfirmasi hapus')"
-              ><button type="button" name="hapus">Hapus</button></a
             >
           </form>
         </div>
