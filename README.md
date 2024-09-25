@@ -1,12 +1,12 @@
-# 🎓 Alumni Management System
-This repository contains a simple system for managing alumni, built using native PHP. The system allows users to store and manage alumni information, including NIM (student ID), name, program of study, and year of graduation.
+# 📰 Online News System
+This repository contains a system for managing online news articles, developed using native PHP. The application allows users to create, read, update, and delete news articles seamlessly.
 
 ## 🛠️ How to Set Up Locally
 To run this system on your local machine, you need to set up a database. Follow these steps:
 1. Clone the repository:
 2. Set up your local server using tools like XAMPP or MAMP.
 3. Create the Database and Tables:
-Open phpMyAdmin, create a new database called sistem_alumni, and run the following SQL script to set up the required tables:
+Open phpMyAdmin, create a new database called online_news, and run the following SQL script to set up the required tables:
 
 ```sql
 -- Create 'alu' table
